@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "node ace serve --watch",
     "build": "node ace build --production",
+    "prepare": "cd .. && husky install api/.husky",
     "start": "node server.js",
     "test": "node ace test",
     "lint": "eslint . --ext=.ts",
@@ -12,8 +13,7 @@
     "lintfix": "npm run format && npm run lint"
   },
   "lint-staged": {
-    "*.{js,ts}": "eslint --cache",
-    "*.**": "prettier --check --ignore-unknown"
+    "*.{js,ts}": "eslint --cache && prettier --check --ignore-unknown"
   },
   "eslintConfig": {
     "extends": [
