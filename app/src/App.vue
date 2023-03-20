@@ -57,9 +57,7 @@ const messages = ref([
 
 /*REACTIVE*/
 const state = reactive({
-  connected: false,
-  fooEvents: [] as any[],
-  barEvents: [] as any[]
+  connected: false
 })
 
 /*DATA*/
@@ -75,34 +73,58 @@ if (socket) {
   socket.on('disconnect', () => {
     state.connected = false
   })
-
-  socket.on('news', (...args) => {
-    console.log(args)
-    state.fooEvents.push(args)
-  })
-
-  socket.emit('my other event', { my: 'data' })
-
-  socket.on('my other event', (...args) => {
-    console.log(args)
-    state.barEvents.push(args)
-  })
 }
 
 /*METHODS*/
 const toggleChat = () => {
   isOpen.value = !isOpen.value
 }
+
+// Afficher un message dans la fenêtre de chat
+const addMessage = (text: string, isUser: boolean) => {
+  messages.value.push({
+    id: messages.value.length + 1,
+    text,
+    isUser,
+    time: new Date().toLocaleTimeString()
+  })
+}
+
+// Soumettre le message au serveur
 const sendMessage = () => {
   if (userInput.value) {
-    messages.value.push({
-      id: messages.value.length + 1,
-      text: userInput.value,
-      isUser: true,
-      time: new Date().toLocaleTimeString()
-    })
+    if (socket) {
+      socket.emit('message', { message: userInput.value })
+      addMessage(userInput.value, true)
+    }
     userInput.value = ''
   }
+}
+
+// Soumettre le message de réponse personnalisée au serveur
+const sendResponse = (input: string, response: string) => {
+  if (socket) {
+    socket.emit('response', { message: input, response })
+  }
+
+  addMessage(`Bot: Thank you, I have learned the response.`, false)
+}
+
+if (socket) {
+  // Afficher un message de bot dans la fenêtre de chat
+  socket.on('message', (data) => {
+    const message = data.message
+    addMessage(message, false)
+  })
+
+  // Afficher une invite de réponse de bot dans la fenêtre de chat
+  socket.on('prompt', (data) => {
+    const message = data.message
+    const response = prompt(`Bot: ${message}`)
+    if (response) {
+      sendResponse(message, response)
+    }
+  })
 }
 </script>
 
@@ -112,6 +134,7 @@ const sendMessage = () => {
   bottom: 20px;
   right: 20px;
 }
+
 .chatbot-icon {
   background-color: #8472f3;
   color: white;
@@ -123,9 +146,11 @@ const sendMessage = () => {
   justify-content: center;
   cursor: pointer;
 }
+
 .chatbot-icon i {
   font-size: 24px;
 }
+
 .chatbot-window {
   position: fixed;
   bottom: 80px;
@@ -138,9 +163,11 @@ const sendMessage = () => {
   justify-content: space-between;
   z-index: 999;
 }
+
 .chatbot-window.open {
   display: flex;
 }
+
 .chatbot-header {
   background-color: #8472f3;
   color: white;
@@ -150,28 +177,33 @@ const sendMessage = () => {
   align-items: center;
   justify-content: space-between;
 }
+
 .chatbot-messages {
   height: 350px;
   overflow-y: scroll;
   padding: 10px;
 }
+
 .chatbot-messages p {
   background-color: #404040;
   padding: 5px;
   border-radius: 5px;
   margin-bottom: 5px;
 }
+
 .chatbot-messages small {
   color: #ccc;
   font-size: 12px;
   margin-top: 5px;
 }
+
 .chatbot-input {
   display: flex;
   justify-content: space-between;
   padding: 10px;
   border-top: 1px solid #ccc;
 }
+
 .chatbot-input input {
   flex: 1;
   padding: 5px;
@@ -179,6 +211,7 @@ const sendMessage = () => {
   border-radius: 5px;
   border: 1px solid #ccc;
 }
+
 .chatbot-input button {
   padding: 5px 10px;
   border-radius: 5px;
@@ -188,9 +221,11 @@ const sendMessage = () => {
   cursor: pointer;
   transition: background-color 0.3s;
 }
+
 .chatbot-input button:hover {
   background-color: #2e8b57;
 }
+
 .close-button {
   background-color: transparent;
   border: none;

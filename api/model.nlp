@@ -1,0 +1,380 @@
+{
+  "settings": {
+    "languages": [
+      "fr"
+    ],
+    "nlu": {
+      "log": true
+    },
+    "tag": "nlp",
+    "threshold": 0.5,
+    "autoLoad": true,
+    "autoSave": true,
+    "modelFileName": "model.nlp",
+    "executeActionsBeforeAnswers": false,
+    "calculateSentiment": true
+  },
+  "nluManager": {
+    "settings": {
+      "tag": "nlu-manager",
+      "log": true
+    },
+    "locales": [
+      "fr"
+    ],
+    "languageNames": {},
+    "domainManagers": {
+      "fr": {
+        "settings": {
+          "locale": "fr",
+          "trainByDomain": false,
+          "tag": "domain-manager-fr",
+          "nluByDomain": {
+            "default": {
+              "className": "NeuralNlu",
+              "settings": {}
+            }
+          },
+          "useStemDict": true
+        },
+        "stemDict": {
+          "hello": {
+            "intent": "hello",
+            "domain": "default"
+          },
+          "s,up,what": {
+            "intent": "Ça va, et toi ?",
+            "domain": "default"
+          },
+          "are,doing,how,you": {
+            "intent": "Ça va, et toi ?",
+            "domain": "default"
+          },
+          "are,how,today,you": {
+            "intent": "Ça va, et toi ?",
+            "domain": "default"
+          },
+          "going,how,it,s": {
+            "intent": "Ça va, et toi ?",
+            "domain": "default"
+          },
+          "are,hello,how,you": {
+            "intent": "Salut, ça va bien et toi ?",
+            "domain": "default"
+          },
+          "nam,s,what,your": {
+            "intent": "Je m'appelle Bot",
+            "domain": "default"
+          }
+        },
+        "intentDict": {
+          "hello": "default",
+          "Ça va, et toi ?": "default",
+          "Salut, ça va bien et toi ?": "default",
+          "Je m'appelle Bot": "default"
+        },
+        "sentences": [
+          {
+            "domain": "default",
+            "utterance": "hello",
+            "intent": "hello"
+          },
+          {
+            "domain": "default",
+            "utterance": "what's up ?",
+            "intent": "Ça va, et toi ?"
+          },
+          {
+            "domain": "default",
+            "utterance": "how are you doing ?",
+            "intent": "Ça va, et toi ?"
+          },
+          {
+            "domain": "default",
+            "utterance": "how are you today ?",
+            "intent": "Ça va, et toi ?"
+          },
+          {
+            "domain": "default",
+            "utterance": "how's it going ?",
+            "intent": "Ça va, et toi ?"
+          },
+          {
+            "domain": "default",
+            "utterance": "hello how are you ?",
+            "intent": "Salut, ça va bien et toi ?"
+          },
+          {
+            "domain": "default",
+            "utterance": "what's your name ?",
+            "intent": "Je m'appelle Bot"
+          }
+        ],
+        "domains": {
+          "master_domain": {
+            "settings": {
+              "locale": "fr",
+              "tag": "nlu-fr",
+              "keepStopwords": true,
+              "nonefeatureValue": 1,
+              "nonedeltaMultiplier": 1.2,
+              "spellCheck": false,
+              "spellCheckDistance": 1,
+              "filterZeros": true,
+              "log": true
+            },
+            "features": {
+              "hello": 1,
+              "what": 1,
+              "s": 1,
+              "up": 1,
+              "how": 1,
+              "are": 1,
+              "you": 1,
+              "doing": 1,
+              "today": 1,
+              "it": 1,
+              "going": 1,
+              "your": 1,
+              "nam": 1
+            },
+            "intents": {
+              "hello": 1,
+              "Ça va, et toi ?": 1,
+              "Salut, ça va bien et toi ?": 1,
+              "Je m'appelle Bot": 1
+            },
+            "intentFeatures": {
+              "hello": {
+                "hello": 1
+              },
+              "Ça va, et toi ?": {
+                "what": 1,
+                "s": 1,
+                "up": 1,
+                "how": 1,
+                "are": 1,
+                "you": 1,
+                "doing": 1,
+                "today": 1,
+                "it": 1,
+                "going": 1
+              },
+              "Salut, ça va bien et toi ?": {
+                "hello": 1,
+                "how": 1,
+                "are": 1,
+                "you": 1
+              },
+              "Je m'appelle Bot": {
+                "what": 1,
+                "s": 1,
+                "your": 1,
+                "nam": 1
+              }
+            },
+            "featuresToIntent": {
+              "hello": [
+                "hello",
+                "Salut, ça va bien et toi ?"
+              ],
+              "what": [
+                "Ça va, et toi ?",
+                "Je m'appelle Bot"
+              ],
+              "s": [
+                "Ça va, et toi ?",
+                "Je m'appelle Bot"
+              ],
+              "up": [
+                "Ça va, et toi ?"
+              ],
+              "how": [
+                "Ça va, et toi ?",
+                "Salut, ça va bien et toi ?"
+              ],
+              "are": [
+                "Ça va, et toi ?",
+                "Salut, ça va bien et toi ?"
+              ],
+              "you": [
+                "Ça va, et toi ?",
+                "Salut, ça va bien et toi ?"
+              ],
+              "doing": [
+                "Ça va, et toi ?"
+              ],
+              "today": [
+                "Ça va, et toi ?"
+              ],
+              "it": [
+                "Ça va, et toi ?"
+              ],
+              "going": [
+                "Ça va, et toi ?"
+              ],
+              "your": [
+                "Je m'appelle Bot"
+              ],
+              "nam": [
+                "Je m'appelle Bot"
+              ]
+            },
+            "neuralNetwork": {
+              "settings": {
+                "log": true,
+                "locale": "fr",
+                "tag": "nlu-fr",
+                "keepStopwords": true,
+                "nonefeatureValue": 1,
+                "nonedeltaMultiplier": 1.2,
+                "spellCheck": false,
+                "spellCheckDistance": 1,
+                "filterZeros": true
+              },
+              "features": [
+                "hello",
+                "what",
+                "s",
+                "up",
+                "how",
+                "are",
+                "you",
+                "doing",
+                "today",
+                "it",
+                "going",
+                "your",
+                "nam"
+              ],
+              "intents": [
+                "hello",
+                "Ça va, et toi ?",
+                "Salut, ça va bien et toi ?",
+                "Je m'appelle Bot"
+              ],
+              "perceptrons": [
+                [
+                  10.134015083312988,
+                  -1.4996060132980347,
+                  -1.6479665040969849,
+                  -0.9996935129165649,
+                  -4.858983993530273,
+                  -4.710623741149902,
+                  -4.710623741149902,
+                  -0.08813584595918655,
+                  -0.06244475767016411,
+                  -0.1299862414598465,
+                  -0.1299862414598465,
+                  -0.49988964200019836,
+                  -0.49988964200019836,
+                  4.147428633041914
+                ],
+                [
+                  -9.094918251037598,
+                  1.8079745769500732,
+                  3.9116389751434326,
+                  5.967223167419434,
+                  3.5678482055664062,
+                  1.4641810655593872,
+                  1.4641810655593872,
+                  5.190568923950195,
+                  5.1904730796813965,
+                  2.1036646366119385,
+                  2.1036646366119385,
+                  -4.159247398376465,
+                  -4.159247398376465,
+                  2.5988814847537514
+                ],
+                [
+                  5.757143974304199,
+                  -0.1443673074245453,
+                  -0.42303916811943054,
+                  -0.043756596744060516,
+                  4.370744705200195,
+                  4.645606517791748,
+                  4.645606517791748,
+                  -8.086100578308105,
+                  -8.079251289367676,
+                  -0.2594453692436218,
+                  -0.2594453692436218,
+                  -0.07736311107873917,
+                  -0.07736311107873917,
+                  -5.428640913303379
+                ],
+                [
+                  -0.4218844771385193,
+                  1.9036908149719238,
+                  1.247217059135437,
+                  -3.4927778244018555,
+                  -0.7692083120346069,
+                  -0.14417912065982819,
+                  -0.14417912065982819,
+                  -0.06373024731874466,
+                  -0.04816899448633194,
+                  -0.6145558953285217,
+                  -0.6145558953285217,
+                  5.3964667320251465,
+                  5.3964667320251465,
+                  0.3418714204441589
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "intentDomains": {},
+    "extraSentences": [
+      [
+        "fr",
+        "hello"
+      ],
+      [
+        "fr",
+        "what's up ?"
+      ],
+      [
+        "fr",
+        "how are you doing ?"
+      ],
+      [
+        "fr",
+        "how are you today ?"
+      ],
+      [
+        "fr",
+        "how's it going ?"
+      ],
+      [
+        "fr",
+        "hello how are you ?"
+      ],
+      [
+        "fr",
+        "what's your name ?"
+      ]
+    ]
+  },
+  "ner": {
+    "settings": {
+      "tag": "ner",
+      "entityPreffix": "%",
+      "entitySuffix": "%"
+    },
+    "rules": {}
+  },
+  "nlgManager": {
+    "settings": {
+      "tag": "nlg-manager"
+    },
+    "responses": {}
+  },
+  "actionManager": {
+    "settings": {
+      "tag": "action-manager"
+    },
+    "actions": {}
+  },
+  "slotManager": {}
+}
