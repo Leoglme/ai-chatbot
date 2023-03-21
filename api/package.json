@@ -13,7 +13,10 @@
     "lintfix": "npm run format && npm run lint"
   },
   "lint-staged": {
-    "*.{js,ts}": "eslint --cache && prettier --check --ignore-unknown"
+    "*.{js,ts}": [
+      "eslint --cache",
+      "prettier --check --ignore-unknown"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -25,7 +28,10 @@
     ],
     "rules": {
       "prettier/prettier": [
-        "error"
+        "error",
+        {
+          "endOfLine": "auto"
+        }
       ]
     }
   },

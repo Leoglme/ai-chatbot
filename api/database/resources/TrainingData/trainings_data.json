@@ -1,0 +1,30 @@
+[
+  {
+    "input": "hello",
+    "output": "hello"
+  },
+  {
+    "input": "what's up ?",
+    "output": "Ça va, et toi ?"
+  },
+  {
+    "input": "how are you doing ?",
+    "output": "Ça va, et toi ?"
+  },
+  {
+    "input": "how are you today ?",
+    "output": "Ça va, et toi ?"
+  },
+  {
+    "input": "how's it going ?",
+    "output": "Ça va, et toi ?"
+  },
+  {
+    "input": "hello how are you ?",
+    "output": "Salut, ça va bien et toi ?"
+  },
+  {
+    "input": "what's your name ?",
+    "output": "Je m'appelle Bot"
+  }
+]
